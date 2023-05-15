@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #ffffff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Calculator</h1>
+    <label for="calculator-type">Select calculator:</label>
+    <select id="calculator-type" onchange="changeCalculator()">
+      <option value="bmi">BMI Calculator</option>
+      <option value="temperature">Celsius to Fahrenheit</option>
+    </select>
+    <div id="bmi-calculator">
+      <label for="height">Height (cm):</label>
+      <input type="number" id="height" placeholder="Enter your height" required>
+      <label for="weight">Weight (kg):</label>
+      <input type="number" id="weight" placeholder="Enter your weight" required>
+      <button onclick="calculateBMI()">Calculate BMI</button>
+      <div class="result" id="result"></div>
+    </div>
+    <div id="temperature-converter" style="display: none;">
+      <label for="celsius">Celsius:</label>
+      <input type="number" id="celsius" placeholder="Enter temperature in Celsius" required>
+      <button onclick="convertTemperature()">Convert</button>
+      <div class="result" id="temp-result"></div>
+    </div>
+  </div>
+
+  <script>
+    function changeCalculator() {
+      var calculatorType = document.getElementById("calculator-type").value;
+      var bmiCalculator = document.getElementById("bmi-calculator");
+      var temperatureConverter = document.getElementById("temperature-converter");
+
+      if (calculatorType === "bmi") {
+        bmiCalculator.style.display = "block";
+        temperatureConverter.style.display = "none";
+      } else if (calculatorType === "temperature") {
+        bmiCalculator.style.display = "none";
+        temperatureConverter.style.display = "block";
+      }
+    }
+
+    function calculateBMI() {
+      var height = document.getElementById("height").value;
+      var weight = document.getElementById("weight").value;
+
+      if (height === "" || weight === "") {
+        alert("Please enter valid values for height and weight.");
+        return;
+      }
+
+      var bmi = weight / ((height / 100) **
